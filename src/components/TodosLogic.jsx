@@ -23,7 +23,7 @@ const TodosLogic = () => {
   return (
     <div>
       <InputTodo />
-      <TodosList todosProps={todos} />
+      <TodosList todosProps={todos} setTodos={setTodos} />
     </div>
   )
 }
