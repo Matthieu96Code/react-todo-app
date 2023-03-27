@@ -1,6 +1,7 @@
 import TodoItem from '@/components/TodoItem';
 
-const TodosList = ({ todosProps }) => {
+const TodosList = (props) => {
+  const { todosProps } = props;
   return (
     <ul>
       {todosProps.map((todo) => (

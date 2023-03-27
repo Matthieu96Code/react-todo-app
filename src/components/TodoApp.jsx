@@ -1,5 +1,5 @@
-import Header from '@/components/Header';
-import TodosLogic from '@/components/TodosLogic';
+import Header from "@/components/Header";
+import TodosLogic from "@/components/TodosLogic";
 
 const TodoApp = () => {
   return (
