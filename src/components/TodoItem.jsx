@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useAuthContext } from '@/context/AuthContext';
 import styles from '@/styles/TodoItem.module.css';
+import { AiFillEdit } from 'react-icons/ai';
 
 const TodoItem = ({ itemProp, setTodos, delTodo, setUpdate }) => {
+  const { user } = useAuthContext();
   const [editing, setEditing] = useState(false);
 
   const handleChange = (id) => {
@@ -51,7 +54,13 @@ const TodoItem = ({ itemProp, setTodos, delTodo, setUpdate }) => {
           checked={itemProp.completed}
           onChange={() => handleChange(itemProp.id)}
         />
-        <button onClick={handleEditing}>Edit</button>
+        {user && (
+          <button onClick={handleEditing}>
+            <AiFillEdit
+              style={{ color: '#5e5e5e', fontSize: '16px' }}
+            />
+          </button>
+        )}
         <button onClick={() => delTodo(itemProp.id)}>Delete</button>
         <span style={itemProp.completed ? completedStyle : null}>
           {itemProp.title}
