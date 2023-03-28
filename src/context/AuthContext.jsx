@@ -1,16 +1,19 @@
-import { useState, useContext, createContext, useEffect} from 'react';
+import {
+  useState, useContext, createContext, useEffect,
+} from 'react';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(getUsername());
-
   function getUsername() {
     // getting stored state
     const temp = localStorage.getItem('username');
     const savedUsername = JSON.parse(temp);
     return savedUsername || '';
   }
+
+  const [user, setUser] = useState(getUsername());
+
   useEffect(() => {
     // storing user state
     const temp = JSON.stringify(user);

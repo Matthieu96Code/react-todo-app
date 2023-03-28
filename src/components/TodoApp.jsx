@@ -1,34 +1,32 @@
 import { Routes, Route } from 'react-router-dom';
-import ProtectedRoute from '@/components/ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 
-import Home from '@/routes/Home';
-import About from '@/routes/About';
-import Login from '@/routes/Login';
-import Profile from '@/routes/Profile';
-import NotMatch from '@/routes/NoMatch';
-import Layout from '@/components/Layout';
-import SinglePage from '@/routes/SinglePage'
+import Home from '../routes/Home';
+import About from '../routes/About';
+import Login from '../routes/Login';
+import Profile from '../routes/Profile';
+import NotMatch from '../routes/NoMatch';
+import Layout from './Layout';
+import SinglePage from '../routes/SinglePage';
 
-const TodoApp = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />}>
-          <Route path=":slug" element={<SinglePage />} />
-        </Route>
-        <Route path="login" element={<Login />} />
-        <Route 
-          path="profile" 
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          } 
-        />
-        <Route path="*" element={<NotMatch />} />
+const TodoApp = () => (
+  <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="about" element={<About />}>
+        <Route path=":slug" element={<SinglePage />} />
       </Route>
-    </Routes>
-  );
-};
+      <Route path="login" element={<Login />} />
+      <Route
+        path="profile"
+        element={(
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+          )}
+      />
+      <Route path="*" element={<NotMatch />} />
+    </Route>
+  </Routes>
+);
 export default TodoApp;

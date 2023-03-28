@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { useAuthContext } from '@/context/AuthContext';
-import styles from '@/styles/TodoItem.module.css';
 import { AiFillEdit } from 'react-icons/ai';
+import { useAuthContext } from '../context/AuthContext';
+import styles from '@/styles/TodoItem.module.css';
 
-const TodoItem = ({ itemProp, setTodos, delTodo, setUpdate }) => {
+const TodoItem = ({
+  itemProp, setTodos, delTodo, setUpdate,
+}) => {
   const { user } = useAuthContext();
   const [editing, setEditing] = useState(false);
 
   const handleChange = (id) => {
-    setTodos((prevState) =>
-    prevState.map((todo) => {
+    setTodos((prevState) => prevState.map((todo) => {
       if (todo.id === id) {
         return {
           ...todo,
@@ -17,8 +18,7 @@ const TodoItem = ({ itemProp, setTodos, delTodo, setUpdate }) => {
         };
       }
       return todo;
-    })
-    );
+    }));
   };
 
   const completedStyle = {
@@ -32,8 +32,8 @@ const TodoItem = ({ itemProp, setTodos, delTodo, setUpdate }) => {
     setEditing(true);
   };
 
-  let viewMode = {};
-  let editMode = {};
+  const viewMode = {};
+  const editMode = {};
   if (editing) {
     viewMode.display = 'none';
   } else {
@@ -55,25 +55,25 @@ const TodoItem = ({ itemProp, setTodos, delTodo, setUpdate }) => {
           onChange={() => handleChange(itemProp.id)}
         />
         {user && (
-          <button onClick={handleEditing}>
+          <button type="button" onClick={handleEditing}>
             <AiFillEdit
               style={{ color: '#5e5e5e', fontSize: '16px' }}
             />
           </button>
         )}
-        <button onClick={() => delTodo(itemProp.id)}>Delete</button>
+        <button type="button" onClick={() => delTodo(itemProp.id)}>Delete</button>
         <span style={itemProp.completed ? completedStyle : null}>
           {itemProp.title}
         </span>
       </div>
       <input
-      type="text"
-      value={itemProp.title}
-      className={styles.textInput}
-      style={editMode}
-      onChange={(e) => setUpdate(e.target.value, itemProp.id)}
-      onKeyDown={handleUpdatedDone}
-    />
+        type="text"
+        value={itemProp.title}
+        className={styles.textInput}
+        style={editMode}
+        onChange={(e) => setUpdate(e.target.value, itemProp.id)}
+        onKeyDown={handleUpdatedDone}
+      />
     </li>
   );
 };

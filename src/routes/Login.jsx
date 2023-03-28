@@ -1,9 +1,10 @@
-import { useNavigate,
-  useLocation
+import {
+  useNavigate,
+  useLocation,
 } from 'react-router-dom';
 import { useState } from 'react';
 import styles from '@/styles/Login.module.css';
-import { useAuthContext } from '@/context/AuthContext';
+import { useAuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -11,11 +12,11 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.pathname || '/';
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username) return;
-    login(username)
+    login(username);
     navigate(from, { replace: true });
   };
   return (
@@ -29,7 +30,7 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <button>Login</button>
+          <button type="button">Login</button>
         </form>
       </div>
     </div>
